@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+{% block title %} Compra {% endblock %}
+{% block body %}
+    <h1>Ficha de la compra</h1>
+        {% if compra %}
+            {{ include ('compra/datosCompra.html.twig', {'compra' : compra }) }}
+        {% else %}
+            <p>Compra no encontrada</p>
+        {% endif %}
+{% endblock %}

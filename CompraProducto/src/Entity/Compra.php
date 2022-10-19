@@ -8,6 +8,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+use App\Entity\Producto;
+
 #[ORM\Entity(repositoryClass: CompraRepository::class)]
 class Compra
 {
@@ -20,12 +22,11 @@ class Compra
     private ?\DateTimeInterface $fecha = null;
 
     #[ORM\ManyToMany(targetEntity: Producto::class)]
-    private Collection $productos;
+    private Collection $productoscomprados;
 
     public function __construct()
     {
-        $this->productosComprados = new ArrayCollection();
-        $this->productos = new ArrayCollection();
+        $this->productoscomprados = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -48,24 +49,26 @@ class Compra
     /**
      * @return Collection<int, Producto>
      */
-    public function getProductos(): Collection
+    public function getProductoscomprados(): Collection
     {
-        return $this->productos;
+        return $this->productoscomprados;
     }
 
-    public function addProducto(Producto $producto): self
+    public function addProductoscomprado(Producto $productoscomprado): self
     {
-        if (!$this->productos->contains($producto)) {
-            $this->productos->add($producto);
+        if (!$this->productoscomprados->contains($productoscomprado)) {
+            $this->productoscomprados->add($productoscomprado);
         }
 
         return $this;
     }
 
-    public function removeProducto(Producto $producto): self
+    public function removeProductoscomprado(Producto $productoscomprado): self
     {
-        $this->productos->removeElement($producto);
+        $this->productoscomprados->removeElement($productoscomprado);
 
         return $this;
     }
+
+
 }
