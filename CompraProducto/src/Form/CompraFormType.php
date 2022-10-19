@@ -32,6 +32,11 @@ class CompraFormType extends AbstractType{
     public function buildForm(FormBuilderInterface $builder, array $options){
         $builder
             ->add('fecha', DateType::class)
+            ->add('productoscomprados', CollectionType::class, array(
+                'entry_type' => ProductoFormType::class, 
+                'entry_options' => ['label' => false],
+                'allow_add' => true,
+            ))
             ->add('save', SubmitType::class, array('label' => 'Enviar'));
     }
 }
