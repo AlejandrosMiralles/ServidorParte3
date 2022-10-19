@@ -51,6 +51,7 @@ class CompraController extends AbstractController
 
     
         //Insertar un formulario y guardar la compra rellenada
+        //Actualizar para que funcione con colecciones de productos 
         #[Route('/compra/nueva', name: "nueva_compra")]
         public function nuevo(ManagerRegistry $doctrine, Request $request){
             $compra = new Compra();
@@ -77,7 +78,6 @@ class CompraController extends AbstractController
     
     
         //Borrar compra
-
         #[Route('/compra/delete/{id}', name: 'eliminar_compra')]
         public function delete(ManagerRegistry $doctrine, $id): Response{
             $entityManager = $doctrine->getManager();
@@ -99,27 +99,27 @@ class CompraController extends AbstractController
 
 
         //Editar
-        //Enviar un formulario y modificar la provincia del id dado
+        //Enviar un formulario y modificar la compra del id dado
         /**
-         * @Route("/provincia/editar/{codigo}", name="editar_provincia", requirements={"codigo"="\d+"})
+         * @Route("/compra/editar/{codigo}", name="editar_compra", requirements={"codigo"="\d+"})
          */
         public function editar(ManagerRegistry $doctrine, Request $request, $codigo){
             
-            $repositorio = $doctrine->getRepository(Provincia::class);
-            $provincia = $repositorio->find($codigo);
+            $repositorio = $doctrine->getRepository(Compra::class);
+            $compra = $repositorio->find($codigo);
     
             
-            $formulario=  $this->createForm(ProvinciaFormType::class, $provincia);
+            $formulario=  $this->createForm(CompraFormType::class, $compra);
             $formulario->handleRequest($request);
     
             if($formulario->isSubmitted() && $formulario->isValid()){
-                $provincia = $formulario->getData();
+                $compra = $formulario->getData();
                 $entityManager = $doctrine->getManager();
-                $entityManager->persist($provincia);
+                $entityManager->persist($compra);
                 $entityManager->flush();
             }
     
-            return $this->render('provincia/editar.html.twig', array('formulario' => $formulario->createView()));
+            return $this->render('compra/editar.html.twig', array('formulario' => $formulario->createView()));
         
         }
 }
