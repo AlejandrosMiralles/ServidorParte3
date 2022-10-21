@@ -43,7 +43,6 @@ class CompraController extends AbstractController
 
     
         //Insertar un formulario y guardar la compra rellenada
-        //Actualizar para que funcione con colecciones de productos 
         #[Route('/compra/nueva', name: "nueva_compra")]
         public function nuevo(ManagerRegistry $doctrine, Request $request){
             $compra = new Compra();
@@ -90,7 +89,6 @@ class CompraController extends AbstractController
     
 
 
-        //Editar
         //Enviar un formulario y modificar la compra del id dado
         /**
          * @Route("/compra/editar/{codigo}", name="editar_compra", requirements={"codigo"="\d+"})
