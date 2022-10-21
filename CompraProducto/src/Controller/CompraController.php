@@ -24,14 +24,6 @@ class CompraController extends AbstractController
     }
 
 
-    //Se debe poder listar, buscar, editar, insertar y modificar la entidad
-
-
-
-    //Modificar esto Y ver QUE necesito
-
-
-        //Buscar compra 
 
         //Mostrar una compra por su id
         /**

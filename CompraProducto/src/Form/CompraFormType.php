@@ -18,11 +18,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
@@ -32,11 +28,11 @@ class CompraFormType extends AbstractType{
     public function buildForm(FormBuilderInterface $builder, array $options){
         $builder
             ->add('fecha', DateType::class)
-            ->add('productoscomprados', CollectionType::class, array(
-                'entry_type' => ProductoFormType::class, 
-                'entry_options' => ['label' => false],
-                'allow_add' => true,
-            ))
+            ->add('productoscomprados', EntityType::class, array(
+                    'class' => Producto::class,
+                    'choice_label' => 'nombre',
+                    'multiple' => true,
+                    'expanded' => true,))
             ->add('save', SubmitType::class, array('label' => 'Enviar'));
     }
 }

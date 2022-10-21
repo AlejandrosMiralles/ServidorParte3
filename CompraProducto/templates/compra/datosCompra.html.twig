@@ -2,4 +2,10 @@
 <ul>
     <li>Compra: <strong>{{ compra.id }}</strong></li>
     <li>Fecha: <strong>{{ compra.fecha|date("d/m/Y") }}</strong></li>
+    <li>Productos: 
+        <ol>
+            {% for producto in compra.productoscomprados %}
+                <li>{{ producto.nombre }}: {{ producto.precio }}  euros.</li>
+            {% endfor %}
+        </ol>
 </ul>
